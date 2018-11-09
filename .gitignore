@@ -1,2 +1,4 @@
 # etc
 .idea/
+chromedriver
+CONFIG.*
