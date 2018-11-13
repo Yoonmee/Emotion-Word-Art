@@ -5,8 +5,12 @@ const morgan = require('morgan');
 const path = require('path');
 const fs = require('fs');
 
+var pos_img = new Array();
+var neg_img = new Array();
+
 var count = 10;
 var twitter = fs.readFileSync('./data/twitter.txt').toString().split(":::");
+var init_txt = fs.readFileSync('./data/init.txt').toString();
 
 function intervalFunc() {
   twitter = fs.readFileSync('./data/twitter.txt').toString().split(":::");
@@ -15,19 +19,6 @@ function intervalFunc() {
   if (count > 19) count = 19;
   console.log(twitter[0]);
 }
-
-//setInterval(intervalFunc, 5000);
-
-const app = express();
-// Setup logger
-
-app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
-
-// Serve static assets
-app.use(express.static(path.resolve(__dirname, '..', 'build')));
-var pos_img = new Array();
-var neg_img = new Array();
-var init_txt = fs.readFileSync('./data/init.txt').toString().split(":::");
 
 //read pos img
 for (var i = 1; i < 6; i++) {
@@ -41,9 +32,17 @@ for (var i = 1; i < 6; i++) {
   neg_img[i - 1] = fs.readFileSync(url).toString();
 }
 
-for (var i = 1; i < 6; i++) {
+//setInterval(intervalFunc, 5000);
 
-}
+const app = express();
+// Setup logger
+
+app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
+
+// Serve static assets
+app.use(express.static(path.resolve(__dirname, '..', 'build')));
+
+
 // Always return the main index.html, so react-router render the route in the client
 //   모든 request에 대해서 build폴더 아래 index.html을 보내도록 되어 있는데,
 //       이부분을 수정하여 server side 프로그래밍을 한다.
@@ -67,7 +66,12 @@ app.get("/twitter", function (req, res, next) {
 
 //send init message
 app.get("/init", function (req, res, next) {
-  res.send({ init_txt });
+  res.send({
+    sentence: init_txt,
+    sentimental: {
+    emotion: 'pos', level: 0,
+    }
+  });
 });
 
 const PORT = process.env.PORT || 9000; // use 9000 port
