@@ -1,0 +1,6 @@
+[consumer_key] : INPUT_HERE
+[consumer_secret] :INPUT_HERE
+[access_token] :INPUT_HERE
+[access_token_secret] :INPUT_HERE
+[keyword 여러개 중복시 OR 입력] :행복 OR 감성
+[트위터 파일 재갱신시간 (기본 5초, 초단위입력)] :5
