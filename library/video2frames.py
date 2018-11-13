@@ -13,10 +13,10 @@ def video2frame(file, dir):
     if not os.path.exists("./"+file):
         print("Input video file is not found")
         return 1
-    if os.path.exists("./"+dir):
+    if os.path.exists(+dir):
         print ("Remove existing output folder")
     try:
-        os.makedirs("./"+dir)
+        os.makedirs(dir)
     except:
         pass
     cap = cv2.VideoCapture()
@@ -82,9 +82,9 @@ if __name__ == "__main__":
 
     print ("Start Video2Frames script ...")
     pos_file = input(">>> 긍정 영상 이름을 확장자를 포함해서 입력해주세요 : ").strip()
-    pos_outputDir = "./data/img/pos"
+    pos_outputDir = "../data/img/pos"
     neg_file = input(">>> 부정 영상 이름을 확장자를 포함해서 입력해주세요 : ").strip()
-    neg_outputDir = "./data/img/neg"
+    neg_outputDir = "../data/img/neg"
     #maxframes = int( input(">>> 뽑으려는 사진갯수를 정하세요 : ").strip())
     # parser = argparse.ArgumentParser(description="Video2Frames converter")
     # parser.add_argument('input', metavar='<input_video_file>', help="Input video file")
