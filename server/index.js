@@ -8,7 +8,7 @@ const fs = require('fs');
 var pos_img = new Array();
 var neg_img = new Array();
 
-var count = 10;
+var count = 20;
 var twitter = fs.readFileSync('./data/twitter.txt').toString().split(":::");
 var init_txt = fs.readFileSync('./data/init.txt').toString();
 
@@ -16,7 +16,7 @@ function intervalFunc() {
   twitter = fs.readFileSync('./data/twitter.txt').toString().split(":::");
   count += parseInt(twitter[0]);
   if (count < 1) count = 1;
-  if (count > 19) count = 19;
+  if (count > 39) count = 39;
   console.log(twitter[0]);
 }
 
@@ -58,8 +58,8 @@ app.get("/twitter", function (req, res, next) {
   res.send({
     sentence: twitter[1],
     sentimental: {
-      emotion: (count >= 10) ? 'pos' : 'neg',
-      level: parseInt(Math.abs(10 - parseInt(count)) / 2),
+      emotion: (count >= 20) ? 'pos' : 'neg',
+      level: parseInt(Math.abs(20 - parseInt(count)) / 2),
     }
   });
 });

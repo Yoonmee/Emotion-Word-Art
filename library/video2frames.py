@@ -23,7 +23,7 @@ def video2frame(file, dir):
     cap.open("./"+file)
     frameCount = cap.get(cv2.CAP_PROP_FRAME_COUNT)
     skipDelta = 0
-    maxframes = 5
+    maxframes = 10
     if maxframes and frameCount > maxframes:
         skipDelta = frameCount / maxframes
 
