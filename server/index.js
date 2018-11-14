@@ -32,8 +32,6 @@ for (var i = 1; i < 6; i++) {
   neg_img[i - 1] = fs.readFileSync(url).toString();
 }
 
-//setInterval(intervalFunc, 5000);
-
 const app = express();
 // Setup logger
 
@@ -41,11 +39,6 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
-
-
-// Always return the main index.html, so react-router render the route in the client
-//   모든 request에 대해서 build폴더 아래 index.html을 보내도록 되어 있는데,
-//       이부분을 수정하여 server side 프로그래밍을 한다.
 
 //send rgb
 app.get("/rgb", function (req, res, next) {
