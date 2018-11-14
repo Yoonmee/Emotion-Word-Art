@@ -21,13 +21,13 @@ function intervalFunc() {
 }
 
 //read pos img
-for (var i = 1; i < 6; i++) {
+for (var i = 1; i < 11; i++) {
   var url = './data/img/pos/pos_' + i + '_rgb.txt';
   pos_img[i - 1] = fs.readFileSync(url).toString();
 }
 
 //read neg img
-for (var i = 1; i < 6; i++) {
+for (var i = 1; i < 11; i++) {
   var url = './data/img/neg/neg_' + i + '_rgb.txt';
   neg_img[i - 1] = fs.readFileSync(url).toString();
 }

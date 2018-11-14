@@ -22,7 +22,10 @@ class Image extends Component {
   componentWillMount() {
     // 모든 rgb 색상 목록 받아와서 state에 저장
     axios.get('/rgb')
-      .then(res => this.setState({ rgbList: res.data }));
+      .then(res => {
+        console.log(res.data);
+        return this.setState({ rgbList: res.data });
+      });
     axios.get('/init')
       .then(res => this.setState({ sentence: res.data.sentence}));
   }
@@ -55,7 +58,6 @@ class Image extends Component {
 
   // 감정 레벨 전후로 왔다갔다 주기적으로 반복
   level = () => {
-
     const { direction, level } = this.state;
     if (level === 0) return;
     if (direction) {
