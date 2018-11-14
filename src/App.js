@@ -14,8 +14,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentCount: 10,
-      username: '',
+      
     }
   }
 
@@ -31,16 +30,13 @@ class App extends Component {
   getSentenceFromDB = () => {
     const { addSentence } = this.props;
     axios.get('/twitter')
-      .then(res => {
-        addSentence(res.data)
-      });
+      .then(res => addSentence(res.data));
   }
 
   render() {
-    const { username } = this.state;
     return (
       <div className="App">
-        <h1>C O G A M {username}</h1>
+        <h1>C O G A M</h1>
         <div className="text-area">
           <Image />
         </div>
@@ -53,7 +49,7 @@ class App extends Component {
 
 export default connect(
   state => ({
-
+    
   }),
   dispatch => ({
     addSentence: bindActionCreators(reducer.addSentence, dispatch)

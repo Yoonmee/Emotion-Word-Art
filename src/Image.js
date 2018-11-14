@@ -6,13 +6,13 @@ import * as reducer from './store';
 
 import axios from 'axios';
 
-import { text } from './color';
+const FRAME_SIZE = 10;
 
 class Image extends Component {
   constructor() {
     super();
     this.state = {
-      sentence: (Array(30).join(text)).substr(0, 7000),
+      sentence: '',
       level: 0,
       emotion: 'pos',
       direction: true,    // true: +1, false: -1
@@ -20,20 +20,22 @@ class Image extends Component {
   }
 
   componentWillMount() {
+    // 모든 rgb 색상 목록 받아와서 state에 저장
     axios.get('/rgb')
       .then(res => this.setState({ rgbList: res.data }));
+    axios.get('/init')
+      .then(res => this.setState({ sentence: res.data.sentence}));
   }
 
   componentDidMount() {
-    let intervalId = setInterval(this.level, 1000);
-    this.setState({ intervalId: intervalId });
+    // let intervalId = setInterval(this.level, 5000);
+    // this.setState({ intervalId: intervalId });
   }
 
   componentWillReceiveProps(nextProps) {
     const { typingStatus, word, sentimental } = nextProps;
     const { typingNone } = this.props;
     let { sentence } = this.state;
-    console.log('다음 감정: ', sentimental);
 
     // typing이 끝났을 때
     if (typingStatus === 'done') {
@@ -50,13 +52,16 @@ class Image extends Component {
       return typingNone();
     }
   }
-  
+
+  // 감정 레벨 전후로 왔다갔다 주기적으로 반복
   level = () => {
+
     const { direction, level } = this.state;
+    if (level === 0) return;
     if (direction) {
       return this.setState({
-        level: (level >= 5) ? 4 : level + 1,
-        direction: (level >= 5) ? true : false,
+        level: (level >= FRAME_SIZE) ? FRAME_SIZE - 1 : level + 1,
+        direction: (level >= FRAME_SIZE) ? true : false,
       })
     } else {
       return this.setState({
@@ -68,8 +73,11 @@ class Image extends Component {
 
   render() {
     const { rgbList, level } = this.state;
+    console.log('감정레벨: ', level);
 
+    // rgbList가 로딩되지 않으면 렌더링하지 않음
     if (!rgbList) return <div />;
+
     const emotion = this.state.emotion.concat('_img');
     const colorList = (rgbList[emotion][level]) ? rgbList[emotion][level].split(':') : rgbList[emotion][0]; // ':'로 rgb 나눔
     const textList = this.state.sentence.split('');

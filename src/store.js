@@ -1,5 +1,4 @@
 import { handleActions, createAction } from 'redux-actions';
-// import { text } from './color';
 
 const initialState = {
   typingStatus: 'none',   // typing, done, none
