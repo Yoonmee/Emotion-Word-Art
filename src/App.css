@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   align-items: center;
-  background-color: black;
+  background-image: url(universe.jpg);
   color: white;
   padding-top: 6px;
   padding-bottom: 100px;
@@ -16,6 +16,7 @@ h1.title {
   /* background-color: aqua; */
   padding: 10px;
   border: 2px solid !important;
+  background-color: black;
   color: white;
   line-height: 0px;
   width: 800px;
