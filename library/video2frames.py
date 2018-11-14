@@ -1,4 +1,4 @@
-__author__ = 'vfdev'
+__author__ = 'yoongotto'
 # Python
 import os
 import subprocess
@@ -13,17 +13,17 @@ def video2frame(file, dir):
     if not os.path.exists("./"+file):
         print("Input video file is not found")
         return 1
-    if os.path.exists("./"+dir):
+    if os.path.exists(+dir):
         print ("Remove existing output folder")
     try:
-        os.makedirs("./"+dir)
+        os.makedirs(dir)
     except:
         pass
     cap = cv2.VideoCapture()
     cap.open("./"+file)
     frameCount = cap.get(cv2.CAP_PROP_FRAME_COUNT)
     skipDelta = 0
-    maxframes = 5
+    maxframes = 10
     if maxframes and frameCount > maxframes:
         skipDelta = frameCount / maxframes
 
@@ -31,7 +31,6 @@ def video2frame(file, dir):
     idx = 0
     while frameId < frameCount:
         ret, frame = cap.read()
-        # print frameId, ret, frame.shape
         if not ret:
             print ("Failed to get the frame {f}".format(f=frameId))
             continue
@@ -52,7 +51,6 @@ def video2frame(file, dir):
         ofname = os.path.join(dir, fname)
 
         rgbof.close()
-        # args.output = cv2.resize(args.output, (108, 192), interpolation=cv2.INTER_CUBIC)
         ret = cv2.imwrite(ofname, frame)
 
         if not ret:
@@ -61,10 +59,6 @@ def video2frame(file, dir):
 
         frameId += int(1 + skipDelta)
         cap.set(cv2.CAP_PROP_POS_FRAMES, frameId)
-        # args.output = np.array(args.output)
-        # for img in args.output:
-        #     img = cv2.resize(img, (108, 192), interpolation=cv2.INTER_CUBIC)
-
 
 def write_exif_model(folder_path, model, fields=None):
     cmd = ['exiftool', '-overwrite_original', '-r']
@@ -78,20 +72,10 @@ def write_exif_model(folder_path, model, fields=None):
 
 
 if __name__ == "__main__":
-    #python3 video2frames.py ./pos.mov ./output/images —maxframe=10
-
+    #python3 video2frames.py ./pos.mov ./output/images
     print ("Start Video2Frames script ...")
     pos_file = input(">>> 긍정 영상 이름을 확장자를 포함해서 입력해주세요 : ").strip()
-    pos_outputDir = "./data/img/pos"
+    pos_outputDir = "../data/img/pos"
     neg_file = input(">>> 부정 영상 이름을 확장자를 포함해서 입력해주세요 : ").strip()
-    neg_outputDir = "./data/img/neg"
-    #maxframes = int( input(">>> 뽑으려는 사진갯수를 정하세요 : ").strip())
-    # parser = argparse.ArgumentParser(description="Video2Frames converter")
-    # parser.add_argument('input', metavar='<input_video_file>', help="Input video file")
-    # parser.add_argument('output', metavar='<output_folder>', help="Output folder. If exists it will be removed")
-    # parser.add_argument('--maxframes', type=int, help="Output max number of frames")
-    # parser.add_argument('--rotate', type=int, choices={90, 180, 270}, help="Rotate clock-wise output frames")
-    # parser.add_argument('--exifmodel', help="An example photo file to fill output meta-tags")
-    # parser.add_argument('--verbose', action='store_true', help="Enable verbose")
-    # args = parser.parse_args()
+    neg_outputDir = "../data/img/neg"
     main()
