@@ -30,7 +30,9 @@ class App extends Component {
   getSentenceFromDB = () => {
     const { addSentence } = this.props;
     axios.get('/twitter')
-      .then(res => addSentence(res.data));
+      .then(res => {
+        if(res.data.sentence) addSentence(res.data);
+      });
   }
 
   render() {
