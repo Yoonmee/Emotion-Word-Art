@@ -10,7 +10,7 @@ Library that receives real-time data using letters and analyzes positive affirma
 ## 1.2 How ? 
 실시간 피드를 파싱하여 머신러닝을 이용해 글에 대해 감정의 긍정 부정을 판별하고 그 판별된 정보를 React 프레임워크를 이용하여 Virtual DOM 에 실시간으로 타이핑 애니메이션과 글자색을 이용하여 영상을 구현하였다. 자세한 흐름은 아래와 같다.
 The real - time feed is parsed, machine learning is used to judge affirmative denial of the sentence, and the discriminated information is imaged using real - time typing animation and character color in Virtual DOM using React framework. The detailed flow is as follows.
-![example2](library/gitimage/2.png)
+![example2](library/gitimage/2.PNG)
 
 ## 1.3 Directory hierarchy
 ```sh
