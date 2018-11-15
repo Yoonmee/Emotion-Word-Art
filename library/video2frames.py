@@ -13,7 +13,7 @@ def video2frame(file, dir):
     if not os.path.exists("./"+file):
         print("Input video file is not found")
         return 1
-    if os.path.exists(+dir):
+    if os.path.exists(dir):
         print ("Remove existing output folder")
     try:
         os.makedirs(dir)
