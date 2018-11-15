@@ -22,7 +22,7 @@ def read_data(filename):
 
 if __name__ == "__main__":
     txt = read_data('ratings_train.txt')[1:]
-    initfile = open("../data/init.txt", mode='w')  # 텍스트 파일로 출력(쓰기모드)
+    initfile = open("../data/init.txt", mode='w',encoding='utf8')  # 텍스트 파일로 출력(쓰기모드)
     for t in txt[:20]:
         initfile.write(t[1])
     initfile.close()
@@ -40,7 +40,7 @@ if __name__ == "__main__":
             randomIdx -= 5
         else:
             randomIdx += 5
-        wfile = open("../data/twitter.txt", mode='w')  # 텍스트 파일로 출력(쓰기모드)
+        wfile = open("../data/twitter.txt", mode='w',encoding='utf8')  # 텍스트 파일로 출력(쓰기모드)
         if per <= randomIdx: #긍정부분
             while True:
                 r = random.choice(txt)
